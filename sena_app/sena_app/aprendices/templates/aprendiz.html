@@ -1,0 +1,116 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendices</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+        table {
+            width: 60%;
+            margin: 40px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.705);
+            background-color: rgb(255, 246, 246);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #ff8d47;
+            color: white;
+            font-weight: bold;
+        }
+        .sena-img{
+            height: 150px;
+            width: 100px;
+            max-height: 60px;
+        }
+        nav{
+            background-color: #ff6200;
+            display: flex;
+            padding-bottom: 20px ;
+        }
+        .titulo-nav{
+            color: white;
+        }
+        div{
+            background-color: #ff6200;
+            font-size: 20px;
+        }
+        button{
+            align-items: center;
+            cursor: pointer;
+            background-color: #ff6200;
+            text-align: center;
+            color: white;
+            height: 50px;
+            width: 100px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 30px;
+            text-decoration: none;
+            font-size: medium;
+        }
+        button:hover{
+            background: linear-gradient(20deg, #178236,#2AA63E);
+        }
+
+        footer{
+            display: flex;
+            background-color: #A1A1A1;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="https://www.thearchipielagopress.co/wp-content/uploads/2020/10/sena-1800.jpg" alt="" class="sena-img">
+        <div><h1 class="titulo-nav">Aprendices</h1></div>
+    </nav>
+    <table border="1" cellspacing="0" cellpadding="7">
+        <caption>Aprendices del centro minero</caption>
+        <thead>
+            <tr>
+                <th>Documento de identidad</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Telefono</th>
+                <th>Correo</th>
+                <th>Fecha de nacimiento</th>
+                <th>Ciudad</th>
+                <th>Programa de formación</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in aprendices %}
+            <tr>
+                <td>{{ i.documento_identidad }}</td>
+                <td><a href="/aprendices/aprendiz/{{ i.id }}"><strong>{{ i.nombres }}</strong></a></td>
+                <td>{{ i.apellido }}</td>
+                <td>{{ i.telefono }}</td>
+                <td>{{ i.correo }}</td>
+                <td>{{ i.fecha_nacimiento }}</td>
+                <td>{{ i.ciudad }}</td>
+                <td>{{ i.programa}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="/"><button>Volver</button></a>
+    <a href="/crear_aprendiz/"><button>Agregar Aprendiz</button></a>
+
+    <footer>Sena 2025, Centro Minero ©derechos reservados.</footer>
+</body>
+</html>

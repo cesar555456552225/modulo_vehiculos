@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle de instructores</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        table {
+            width: 60%;
+            margin: 40px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.705);
+            background-color: rgb(255, 246, 246);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ff8d47;
+            color: white;
+            font-weight: bold;
+        }
+
+        .sena-img {
+            height: 150px;
+            width: 100px;
+            max-height: 60px;
+        }
+
+        nav {
+            background-color: #ff6200;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .titulo-nav {
+            color: white;
+            margin-left: 20px;
+        }
+
+        div {
+            background-color: #ff6200;
+            font-size: 20px;
+        }
+
+        button {
+            align-items: center;
+            cursor: pointer;
+            background-color: #ff6200;
+            text-align: center;
+            color: white;
+            height: 50px;
+            width: 100px;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 30px;
+            text-decoration: none;
+            font-size: medium;
+            border: none;
+        }
+
+        button:hover {
+            background: linear-gradient(20deg, #178236, #2AA63E);
+        }
+
+        footer {
+            display: flex;
+            background-color: #A1A1A1;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            margin-top: 40px;
+        }
+
+        section.bebe {
+            width: 60%;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff4eb;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: left;
+        }
+
+        section.bebe p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="https://www.thearchipielagopress.co/wp-content/uploads/2020/10/sena-1800.jpg" alt="" class="sena-img">
+        <div><h1 class="titulo-nav">Detalle del Instructor</h1></div>
+    </nav>
+
+    <section class="bebe">
+            <p><strong>Documento de identidad:</strong> {{ instructor.documento_identidad }}</p>
+            <p><strong>Nombres:</strong> {{ instructor.nombre }}</p>
+            <p><strong>Apellidos:</strong> {{ instructor.apellido }}</p>
+            <p><strong>Telefono:</strong> {{ instructor.telefono }}</p>
+            <p><strong>Correo:</strong> {{ instructor.correo }}</p>
+            <p><strong>Fecha de nacimiento:</strong> {{ instructor.fecha_nacimiento }}</p>
+            <p><strong>Ciudad:</strong> {{ instructor.ciudad }}</p>
+            <p><strong>Dirección:</strong> {{ instructor.direccion }}</p>
+            <p><strong>Nivel de educación:</strong> {{ instructor.nivel_educativo }}</p>
+            <p><strong>epecialidad:</strong> {{ Instructor.especialidad }}</p>
+            <p><strong>Años de experiencia:</strong> {{ Instructor.años_experiencia }}</p>
+            <p><strong>Activo:</strong> {{ Instructor.activo }}</p>
+            <p><strong>fecha de vinculacion:</strong> {{ Instructor.fecha_vinculacion }}</p>
+            </section>
+
+    <a href="/instructores/"><button>Volver a lista de instuctores</button></a>
+
+    <footer>Sena 2025, Centro Minero © Derechos reservados.</footer>
+</body>
+</html>

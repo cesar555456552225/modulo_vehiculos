@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Instructor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .titulo-form {
+            text-align: center;
+            background-color: #f5880b;
+            color: white;
+            padding: 15px;
+            margin: -25px -25px 20px -25px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            margin-top: 10px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .row {
+            display: flex;
+            gap: 15px;
+        }
+
+        .col {
+            flex: 1;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: #f5880b;
+        }
+
+        .btn-primary:hover {
+            background-color: green;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        small {
+            color: #666;
+            display: block;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .text-danger {
+            color: red;
+        }
+        nav{
+            background-color: #ff6200;
+            display: flex;
+            padding-bottom: 20px ;
+        }
+        .titulo-nav{
+            color: white;
+        }
+        .sena-img{
+            height: 150px;
+            width: 100px;
+            max-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="https://www.thearchipielagopress.co/wp-content/uploads/2020/10/sena-1800.jpg" alt="" class="sena-img">
+        <div><h1 class="titulo-nav">Nuevo Instructor</h1></div>
+    </nav>
+<div class="container">
+    <h1 class="titulo-form">Registrar un nuevo Instructor</h1>
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <label>{{ form.tipo_documento.label }} <span class="text-danger">*</span></label>
+        {{ form.tipo_documento }}
+
+        <div class="row">
+            <div class="col">
+                <label>{{ form.documento_identidad.label }}</label>
+                {{ form.documento_identidad }}
+            </div>
+            <div class="col">
+                <label>{{ form.nombre.label }} <span class="text-danger">*</span></label>
+                {{ form.nombre }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>{{ form.apellido.label }}</label>
+                {{ form.apellido }}
+            </div>
+            <div class="col">
+                <label>{{ form.telefono.label }}</label>
+                {{ form.telefono }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>{{ form.correo.label }} <span class="text-danger">*</span></label>
+                {{ form.correo }}
+            </div>
+            <div class="col">
+                <label>{{ form.fecha_nacimiento.label }}</label>
+                {{ form.fecha_nacimiento }}
+            </div>
+        </div>
+
+        <label>{{ form.ciudad.label }}</label>
+        {{ form.ciudad }}
+
+        <div class="row">
+            <div class="col">
+                <label>{{ form.direccion.label }} <span class="text-danger">*</span></label>
+                {{ form.direccion }}
+            </div>
+            <div class="col">
+                <label>{{ form.nivel_educativo.label }}</label>
+                {{ form.nivel_educativo }}
+            </div>
+
+        <div class="row">
+            <div class="col">
+                <label>{{ form.especialidad.label }} <span class="text-danger">*</span></label>
+                {{ form.especialidad }}
+            </div>
+            <div class="col">
+                <label>{{ form.años_experiencia.label }}</label>
+                {{ form.años_experiencia }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <label>{{ form.activo.label }} <span class="text-danger">*</span></label>
+                {{ form.activo }}
+            </div>
+            <div class="col">
+                <label>{{ form.fecha_vinculacion.label }}</label>
+                {{ form.fecha_vinculacion }}
+            </div>
+        <div class="row">
+            <div class="col">
+                <label>{{ form.fecha_registro.label }} <span class="text-danger">*</span></label>
+                {{ form.fecha_registro }}
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="buttons">
+            <a href="/" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Guardar Instructor</button>
+        </div>
+    </form>
+
+    <small>Los campos marcados con <span class="text-danger">*</span> son obligatorios.</small>
+</div>
+
+</body>
+</html>
