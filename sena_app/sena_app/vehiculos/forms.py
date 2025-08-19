@@ -1,16 +1,82 @@
 # vehiculos/forms.py
+# vehiculos/forms.py
 from django import forms
 from django.core.exceptions import ValidationError
 import re
 
-from .models import Vehiculo, RegistroAcceso
+from .models import Vehiculo, Propietario, RegistroAcceso
 
+class PropietarioForm(forms.ModelForm):
+    class Meta:
+        model = Propietario
+        fields = [
+            'tipo_documento', 'numero_documento', 'nombre_completo',
+            'telefono', 'email', 'tipo_persona'
+        ]
+        widgets = {
+            'tipo_documento': forms.Select(attrs={
+                'class': 'form-control form-select',
+                'required': True
+            }),
+            'numero_documento': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese número de documento',
+                'required': True
+            }),
+            'nombre_completo': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ingrese nombre completo',
+                'required': True
+            }),
+            'telefono': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Ej: 3001234567',
+                'type': 'tel'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'correo@ejemplo.com'
+            }),
+            'tipo_persona': forms.Select(attrs={
+                'class': 'form-control form-select',
+                'required': True
+            })
+        }
+        
+    def clean_numero_documento(self):
+        numero_documento = self.cleaned_data['numero_documento']
+        
+        # Validar que solo contenga números
+        if not numero_documento.isdigit():
+            raise ValidationError('El número de documento solo debe contener números.')
+        
+        # Validar longitud mínima
+        if len(numero_documento) < 6:
+            raise ValidationError('El número de documento debe tener al menos 6 dígitos.')
+        
+        return numero_documento
+    
+    def clean_telefono(self):
+        telefono = self.cleaned_data.get('telefono')
+        if telefono:
+            # Limpiar espacios y caracteres especiales
+            telefono = re.sub(r'[^\d]', '', telefono)
+            
+            # Validar que tenga al menos 7 dígitos
+            if len(telefono) < 7:
+                raise ValidationError('El teléfono debe tener al menos 7 dígitos.')
+            
+            # Validar que tenga máximo 15 dígitos
+            if len(telefono) > 15:
+                raise ValidationError('El teléfono no puede tener más de 15 dígitos.')
+                
+        return telefono
 
 class VehiculoForm(forms.ModelForm):
     class Meta:
         model = Vehiculo
         fields = [
-            'placa', 'tipo_vehiculo', 'marca', 'modelo',
+            'placa', 'tipo_vehiculo', 'marca', 'modelo', 
             'color', 'año', 'propietario', 'observaciones'
         ]
         widgets = {
@@ -140,7 +206,36 @@ class FiltroReporteForm(forms.Form):
     )
     
     tipo_movimiento = forms.ChoiceField(
-        choices=[
+        choices=RegistroAcceso.TIPO_MOVIMIENTO_CHOICES,
+        widget=forms.RadioSelect(attrs={
+            'class': 'form-check-input'
+        }),
+        label='Tipo de movimiento'
+    )
+    
+    observaciones = forms.CharField(
+        required=False,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 2,
+            'placeholder': 'Observaciones adicionales (opcional)'
+        }),
+        label='Observaciones'
+    )
+    
+    def clean_placa(self):
+        placa = self.cleaned_data['placa'].upper().strip()
+        
+        if not placa:
+            raise ValidationError('La placa es requerida.')
+            
+        # Verificar que el vehículo existe y está activo
+        try:
+            vehiculo = Vehiculo.objects.get(placa=placa, activo=True)
+        except Vehiculo.DoesNotExist:
+            raise ValidationError(f'No se encontró un vehículo activo con placa {placa}.')
+        
+        return placachoices=[
             ('', 'Todos los movimientos'),
             ('ENTRADA', 'Solo entradas'),
             ('SALIDA', 'Solo salidas')
