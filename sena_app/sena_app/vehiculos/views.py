@@ -13,8 +13,9 @@ from datetime import datetime, timedelta
 from django.template.loader import render_to_string
 import json
 
-from .models import Vehiculo, Propietario, RegistroAcceso, ConfiguracionSistema
-from .forms import VehiculoForm, PropietarioForm, RegistroAccesoForm, BusquedaForm
+from .models import Vehiculo,  RegistroAcceso, ConfiguracionSistema
+from .forms import VehiculoForm, RegistroAccesoForm, BusquedaForm
+from instructores.forms import InstructorForm
 
 # Vista principal del módulo
 @login_required
@@ -22,7 +23,7 @@ def dashboard_vehiculos(request):
     """Dashboard principal con estadísticas del sistema vehicular"""
     # Estadísticas generales
     total_vehiculos = Vehiculo.objects.filter(activo=True).count()
-    total_propietarios = Propietario.objects.filter(activo=True).count()
+    total_propietarios = InstructorForm.objects.filter(activo=True).count()
     vehiculos_dentro = Vehiculo.objects.filter(activo=True).filter(
         registros_acceso__tipo_movimiento='ENTRADA'
     ).exclude(
