@@ -16,5 +16,5 @@ urlpatterns = [
     path('buscar_vehiculo/', views.buscar_vehiculo_ajax, name='buscar_vehiculo_ajax'),
 
     #reportes
-    path('reportes/', views.reportes, name = 'repsotes'),
+    path('reportes/', views.reportes, name = 'reportes '),
 ]
