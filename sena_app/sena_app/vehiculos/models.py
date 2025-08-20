@@ -28,7 +28,7 @@ class Vehiculo(models.Model):
     observaciones = models.TextField(verbose_name="observaciones en el vehículo", null=True)
 
     def __str__(self):
-        return f"{self.placa}-{self.Instructor.nombre}"
+        return f"{self.placa}"
     
     def esta_dentro(self):
         ultimo_registro = self.registros_acceso.order_by('-fecha_hora').first()
